@@ -21,18 +21,19 @@ class CreatureTable:
 
     SCHEMA = """
         CREATE TABLE creatures (
-            id      INTEGER PRIMARY KEY AUTOINCREMENT,
-            species TEXT NOT NULL,
-            name    TEXT NOT NULL
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            name      TEXT NOT NULL,
+            priority  INTEGER DEFAULT 3,
+            status    INTEGER DEFAULT 0
         )
     """
 
     SEED_DATA = """
-        INSERT INTO creatures (species, name)
+        INSERT INTO creatures (priority, name, status)
         VALUES
-            ("Dragon",  "Pippa"),
-            ("Unicorn", "Barry"),
-            ("Vampire", "Helen")
+            (3, "Mark DTD", 0),
+            (3, "Kill austin", 0),
+            (3, "punch zach", 0)
     """
 
 # Add more table classes here...

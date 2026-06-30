@@ -82,32 +82,27 @@ main > h2 {
 }
 
 
-/* Creature List --------------------------------------------------*/
+/* Todo List --------------------------------------------------*/
 
-#creatures {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr;
+#Todo_List {
+    background-color: var(--back-col-dark);
+    border: 1px solid var(--border-col);
+    border-radius: 0.5rem;
+    padding: 1rem;
 
-    @media (width >= 500px) {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    @media (width >= 800px) {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .creature {
-        padding: 1rem;
-
-        background-color: var(--back-col-dark);
-        border: 2px solid var(--border-col);
+    .Todo_item {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: 0.5rem;
+        border:#244 1px solid;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
         border-radius: 0.5rem;
+        background-color: var(--back-col);
 
-        h3 {
-            color: var(--accent-col);
-        }
     }
+    
 }
 
 

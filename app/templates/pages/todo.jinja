@@ -29,12 +29,13 @@
             <img src="/static/images/icon.svg" alt="Creature Icon" class="logo">
         </a>
 
-        <h1>Creatures</h1>
+        <h1><marquee>To-Do</marquee></h1>
 
         <nav>
+        <marquee behavior="scroll" direction="scroll" scrollamount="10">
             <a href="/">Home</a>
-            <a href="/creatures">Creature List</a>
             <a href="/help">Help</a>
+        </marquee>
         </nav>
     </header>
 
@@ -43,8 +44,27 @@
 
     <main>
 
-        {% block content %}
-        {% endblock %}
+    <h2>Things To-Do</></h2>
+
+    <section id="Todo_List">
+
+        {% for creature in creatures %}
+
+            <div class="Todo_item">
+                <h3>{{ creature.priority }}</h3>
+                <p>Species: <strong>{{ creature.name }}</strong></p>
+            </div>
+
+        {% else %}
+
+            <p>Nothing to do!</p>
+
+        {% endfor %}
+
+    </section>
+
+
+
 
     </main>
 

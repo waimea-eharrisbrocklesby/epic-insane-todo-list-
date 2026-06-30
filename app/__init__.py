@@ -29,9 +29,9 @@ def show_welcome():
 
 
 #-----------------------------------------------------------
-# Creature list page - Show all the creatures
+# Todo list page - Show all the todos
 #-----------------------------------------------------------
-@app.get("/creatures")
+@app.get("/todo")
 def show_all_creatures():
     with connect_db() as db:
         sql = """
@@ -41,7 +41,7 @@ def show_all_creatures():
         params = ()
         creatures = db.execute(sql, params).fetchall()
 
-        return render_template("pages/creature_list.jinja", creatures=creatures)
+        return render_template("pages/todo.jinja", creatures=creatures)
 
 
 #-----------------------------------------------------------
