@@ -1,5 +1,5 @@
 {#=====================================================
-  Help page
+  New Creature page
 =====================================================#}
 
 {% extends 'pages/_base.jinja' %}
@@ -7,9 +7,23 @@
 
 {% block content %}
 
-    <h2>Help</h2>
+    <h2>New Creature</h2>
 
-    <p>The route for this page triggers some flash messages...</p>
+   
+  <form method="post" action="/creatures/new" class="creature-form">
+    
+    <label>
+      Name:
+      <input type="text" name="name" required> 
+    </label>
 
+    <label>
+      Species:
+      <input type="text" name="species" required>
+    </label>
+
+    <button>Add Creature</button>
+
+  </form>
 {% endblock %}
 

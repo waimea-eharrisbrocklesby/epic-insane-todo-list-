@@ -21,42 +21,89 @@ app = Flask(__name__)
 #===========================================================
 
 #-----------------------------------------------------------
-# Welcome page
-#-----------------------------------------------------------
-@app.get("/")
-def show_welcome():
-    return render_template("pages/welcome.jinja")
-
-
-#-----------------------------------------------------------
 # Todo list page - Show all the todos
 #-----------------------------------------------------------
-@app.get("/todo")
+@app.get("/index")
 def show_all_creatures():
     with connect_db() as db:
         sql = """
-            SELECT id, species, name
+            SELECT id, priority, name, status
             FROM creatures
         """
         params = ()
         creatures = db.execute(sql, params).fetchall()
 
-        return render_template("pages/todo.jinja", creatures=creatures)
+        return render_template("pages/index.jinja", creatures=creatures)
 
 
 #-----------------------------------------------------------
-# Help page - Show some help
+# Tik page - Update the status of a todo
 #-----------------------------------------------------------
-@app.get("/help")
-def show_help():
 
-    flash("Flash test message")
-    flash("Flash test message with a longer bit of text")
-    flash("Success test message", "success")
-    flash("Error test message", "error")
+@app.get("/creatures/<int:id>/Tik")
+def update_creature_status(id):
+    with connect_db() as db:
+        sql = """
+            UPDATE creatures
+            SET status = 1
+            WHERE id = ?
+        """
+        params = (id,)
+        db.execute(sql, params)
 
-    return render_template("pages/help.jinja")
+        #done so back to list
+        flash("task completed successfully!", "success")
+        return redirect("/index")
 
+#-----------------------------------------------------------
+# New Task post handler
+#-----------------------------------------------------------
+@app.post("/creatures/new")
+def process_new_creature_form():
+
+    #get data from form
+    priority = request.form.get("Priority", "3").strip()
+    name = request.form.get("name", "").strip()
+
+    #connect to db
+    with connect_db() as db:
+        sql = """
+            INSERT INTO creatures (priority, name)
+            VALUES (?, ?)
+        """
+
+        params = (
+            priority,
+            name
+        )
+
+        #run the query
+        db.execute(sql, params)
+
+        flash(f"Task ({name}) added successfully!", "success")
+
+        #done so back to listy
+        return redirect("/index")
+
+
+
+#-----------------------------------------------------------
+# Creature delete handler - Delete a creature
+#-----------------------------------------------------------
+@app.get("/creatures/<int:id>/delete")
+def delete_a_creature(id):
+    with connect_db() as db:
+        #delete the creature using id
+        sql = """
+            DELETE FROM creatures
+            WHERE id = ?
+        """
+        params = (id,)
+        db.execute(sql, params)
+
+        #done so back to list
+        flash("Creature deleted successfully!", "success")
+        return redirect("/index")
 
 #===========================================================
 # Configure the app

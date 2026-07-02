@@ -1,0 +1,50 @@
+{% extends 'pages/_base.jinja' %}
+
+
+{% block content %}
+
+    <h2>Things To-Do</></h2>
+
+    <section id="Todo_List">
+
+        {% for creature in creatures %}
+
+            <div class="Todo_item">
+                <h3>{{ creature.priority }}</h3>
+                <p>Task: <strong>{{ creature.name }}</strong></p>
+                {% if creature.status == 1 %}
+                    <a href="/creatures/{{ creature.id }}/UnTik"><img src="/static/images/check.svg" alt="Tick"></a>
+                {% else %}
+                    <a href="/creatures/{{ creature.id }}/Tik"><img src="/static/images/unchecked.svg" alt="Unchecked"></a>
+                {% endif %}
+                <a href="/creatures/{{ creature.id }}/delete">Delete</a>
+            </div>
+
+        {% else %}
+
+            <p>Nothing to do!</p>
+
+        {% endfor %}
+
+            <h2>New task</h2>
+
+            
+            <form method="post" action="/creatures/new" class="creature-form">
+                
+                <label>
+                Name:
+                <input type="text" name="name" required> 
+                </label>
+
+                <label>
+                Priority:
+                <input type="number" name="priority" min="1" max="5" >
+                </label>
+
+                <button>Add Creature</button>
+
+            </form>
+
+    </section>
+
+{% endblock %}

@@ -101,6 +101,14 @@ main > h2 {
         border-radius: 0.5rem;
         background-color: var(--back-col);
 
+        h3 {
+            border: 1px solid var(--border-col);
+            border-radius: 100%;
+            width: 2rem;
+            text-align: center;
+
+        }
+
     }
     
 }
